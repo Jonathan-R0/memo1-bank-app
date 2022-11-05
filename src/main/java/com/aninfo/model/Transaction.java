@@ -15,6 +15,18 @@ public class Transaction {
 
     private Double sum;
 
+    public Double getSum() {
+        return this.sum;
+    }
+    public Long getId() {
+        return this.id;
+    }
+
+
+    public TransactionType getTransactionType() {
+        return this.transactionType;
+    }
+
     public Transaction() {
     }
 

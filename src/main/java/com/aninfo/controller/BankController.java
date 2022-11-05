@@ -1,9 +1,11 @@
 package com.aninfo.controller;
 
+import com.aninfo.dto.AccountCreationRequest;
 import com.aninfo.dto.AccountCreationResponse;
 import com.aninfo.model.Account;
 import com.aninfo.model.Transaction;
 import com.aninfo.service.BankService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "/api/v1")
+@Slf4j
 public class BankController {
 
     @Autowired
@@ -23,21 +26,21 @@ public class BankController {
 
     @PostMapping("/accounts")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<AccountCreationResponse> createAccount(@RequestBody Account request) {
-        Account resp = bankService.createAccount(request);
-        return ResponseEntity.of(Optional.of(new AccountCreationResponse(resp)));
+    public void createAccount(@RequestBody AccountCreationRequest request) {
+        bankService.createAccount(request.getBalance());
     }
 
     @PostMapping("/accounts/promo")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<AccountCreationResponse> createAccountWithPromo(@RequestBody Account request) {
-        Account resp = bankService.createAccountWithPromo(request);
-        return ResponseEntity.of(Optional.of(new AccountCreationResponse(resp)));
+    public void createAccountWithPromo(@RequestBody AccountCreationRequest request) {
+        bankService.createAccountWithPromo(request.getBalance());
     }
 
     @GetMapping("/transactions/{id}")
     public ResponseEntity<Transaction> getTransaction(@PathVariable Long id) {
-        return ResponseEntity.of(Optional.of(bankService.getTransaction(id)));
+        Transaction transaction = bankService.getTransaction(id);
+        System.out.println(transaction.toString());
+        return ResponseEntity.of(Optional.of(transaction));
     }
 
     @GetMapping("/accounts")

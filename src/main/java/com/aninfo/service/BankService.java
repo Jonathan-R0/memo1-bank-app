@@ -26,12 +26,12 @@ public class BankService {
     @Autowired
     private TransactionRepository transactionRepository;
 
-    public Account createAccount(Account request) {
-        return accountRepository.save(new Account(request.getBalance()));
+    public Account createAccount(double balance) {
+        return accountRepository.save(new Account(balance));
     }
 
-    public Account createAccountWithPromo(Account request) {
-        return accountRepository.save(new Account(request.getBalance(), promoStartingCredit));
+    public Account createAccountWithPromo(double balance) {
+        return accountRepository.save(new Account(balance, promoStartingCredit));
     }
 
     public Collection<Account> getAccounts() {

@@ -15,11 +15,11 @@ public class AccountIntegrationServiceTest {
     BankService bankService;
 
     Account createAccount(Double balance) {
-        return bankService.createAccount(new Account(balance));
+        return bankService.createAccount(balance);
     }
 
     Account createAccountWithPromo(Double balance) {
-        return  bankService.createAccountWithPromo(new Account(balance));
+        return  bankService.createAccountWithPromo(balance);
     }
 
     Account withdraw(Account account, Double sum) {
