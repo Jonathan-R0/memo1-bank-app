@@ -29,6 +29,11 @@ public class AccountOperationsTest extends AccountIntegrationServiceTest {
         account = createAccount(Double.valueOf(balance));
     }
 
+    @Given("^Account with promo and a balance of (\\d+)$")
+    public void account_with_promo_and_a_balance_of(int balance)  {
+        account = createAccountWithPromo(Double.valueOf(balance));
+    }
+
     @When("^Trying to withdraw (\\d+)$")
     public void trying_to_withdraw(int sum) {
         try {

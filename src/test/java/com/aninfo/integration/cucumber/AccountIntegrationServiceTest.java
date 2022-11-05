@@ -2,7 +2,7 @@ package com.aninfo.integration.cucumber;
 
 import com.aninfo.Memo1BankApp;
 import com.aninfo.model.Account;
-import com.aninfo.service.AccountService;
+import com.aninfo.service.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -12,18 +12,22 @@ import org.springframework.test.context.web.WebAppConfiguration;
 public class AccountIntegrationServiceTest {
 
     @Autowired
-    AccountService accountService;
+    BankService bankService;
 
     Account createAccount(Double balance) {
-        return accountService.createAccount(new Account(balance));
+        return bankService.createAccount(new Account(balance));
+    }
+
+    Account createAccountWithPromo(Double balance) {
+        return  bankService.createAccountWithPromo(new Account(balance));
     }
 
     Account withdraw(Account account, Double sum) {
-        return accountService.withdraw(account.getCbu(), sum);
+        return bankService.withdraw(account.getCbu(), sum);
     }
 
     Account deposit(Account account, Double sum) {
-        return accountService.deposit(account.getCbu(), sum);
+        return bankService.deposit(account.getCbu(), sum);
     }
 
 }
